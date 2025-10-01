@@ -285,6 +285,57 @@ static int STC3115_WriteBytes(unsigned char *data,int RegAddress,int nbr)
 
 /* ---- End of I2C R/W interface --------------------------------------------- */
 
+/*******************************************************************************
+* Function Name  : STC3115_WriteDataToRam
+* Description    : utility function to write the RAM data into STC3115
+* Input          : ref to RAM data array
+* Return         : error status (STC3115_OK, !STC3115_OK)
+*******************************************************************************/
+static int STC3115_WriteDataToRam(unsigned char *RamData)
+{
+	return STC3115_WriteBytes(RamData, STC3115_REG_RAM, STC3115_RAM_SIZE);
+}
+
+/*******************************************************************************
+* Function Name  : STC3115_CalcRamCRC8
+* Description    : calculate the CRC8
+* Input          : data: pointer to byte array, n: number of vytes
+* Return         : CRC calue
+*******************************************************************************/
+static int STC3115_CalcRamCRC8(unsigned char *data, int n)
+{
+	int crc=0;   /* initial value */
+	int i, j;
+
+	for (i=0;i<n;i++)
+	{
+		crc ^= data[i];
+		for (j=0;j<8;j++)
+		{
+			crc <<= 1;
+			if (crc & 0x100)  crc ^= 7;
+		}
+	}
+	return(crc & 255);
+
+}
+
+/*******************************************************************************
+* Function Name  : STC3115_UpdateRamCRC
+* Description    : calculate the RAM CRC
+* Input          : none
+* Return         : CRC value
+*******************************************************************************/
+static int STC3115_UpdateRamCRC(void)
+{
+	int res;
+
+	res=STC3115_CalcRamCRC8(RAMData.db, STC3115_RAM_SIZE-1);
+	RAMData.db[STC3115_RAM_SIZE-1] = res;   /* last byte holds the CRC */
+	//RAMData.reg.CRC = res;   /* last byte holds the CRC */
+	return(res);
+}
+
 /* ---- Internal functions --------------------------------------------------- */
 
 /*******************************************************************************
@@ -615,56 +666,9 @@ static int STC3115_ReadRamData(unsigned char *RamData)
 	return STC3115_ReadBytes(RamData, STC3115_REG_RAM, STC3115_RAM_SIZE);
 }
 
-/*******************************************************************************
-* Function Name  : STC3115_WriteDataToRam
-* Description    : utility function to write the RAM data into STC3115
-* Input          : ref to RAM data array
-* Return         : error status (STC3115_OK, !STC3115_OK)
-*******************************************************************************/
-static int STC3115_WriteDataToRam(unsigned char *RamData)
-{
-	return STC3115_WriteBytes(RamData, STC3115_REG_RAM, STC3115_RAM_SIZE);
-}
 
-/*******************************************************************************
-* Function Name  : STC3115_CalcRamCRC8
-* Description    : calculate the CRC8
-* Input          : data: pointer to byte array, n: number of vytes
-* Return         : CRC calue
-*******************************************************************************/
-static int STC3115_CalcRamCRC8(unsigned char *data, int n)
-{
-  int crc=0;   /* initial value */
-  int i, j;
 
-  for (i=0;i<n;i++)
-  {
-    crc ^= data[i];
-    for (j=0;j<8;j++) 
-    {
-      crc <<= 1;
-      if (crc & 0x100)  crc ^= 7;
-    }
-  }
-  return(crc & 255);
 
-}
-
-/*******************************************************************************
-* Function Name  : STC3115_UpdateRamCRC
-* Description    : calculate the RAM CRC
-* Input          : none
-* Return         : CRC value
-*******************************************************************************/
-static int STC3115_UpdateRamCRC(void)
-{
-  int res;
-  
-  res=STC3115_CalcRamCRC8(RAMData.db, STC3115_RAM_SIZE-1);
-  RAMData.db[STC3115_RAM_SIZE-1] = res;   /* last byte holds the CRC */
-  //RAMData.reg.CRC = res;   /* last byte holds the CRC */
-  return(res);
-}
 
 /*******************************************************************************
 * Function Name  : STC3115_InitRamData
