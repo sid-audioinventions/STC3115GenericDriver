@@ -21,7 +21,7 @@ This project is a fork of st-sw/STC3115GenericDriver (https://github.com/st-sw/S
 include(FetchContent)
 FetchContent_Declare(
   STC3115GenericDriver
-  GIT_REPOSITORY https://github.com/sid-audioinventions/STC3115GenericDriver
+  GIT_REPOSITORY https://github.com/sid-audioinventions/STC3115GenericDriver.git
   GIT_TAG        <commit-or-tag>
 )
 FetchContent_MakeAvailable(STC3115GenericDriver)
