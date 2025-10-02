@@ -1,6 +1,9 @@
 # STC3115GenericDriver
-STC3115 fuel gauge Open source generic driver
+STC3115 fuel gauge Open source generic driver using CMake
 (STC3115 Generic Driver)
+
+# Note 
+This has been forked from https://github.com/st-sw/STC3115GenericDriver
 
 Device under test:
 ----------------
