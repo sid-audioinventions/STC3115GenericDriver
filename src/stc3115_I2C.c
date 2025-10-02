@@ -26,7 +26,7 @@
                     ##### How to use this file#####
   ===============================================================================
 
-	++ 	Update 	I2C_Write and I2C_Read functions with application I2C driver functions.
+	++ 	Update 	STC3115_I2C_Write and STC3115_I2C_Read functions with application I2C driver functions.
 		Follow the code example in each function to call the application I2C API.
 				
 */
@@ -34,7 +34,7 @@
 /* ---- External I2C R/W interface  ------------------------------------------- */
 
 /*******************************************************************************
-* Function Name  : I2C_Write
+* Function Name  : STC3115_I2C_Write
 * Description    : utility function to write several bytes to STC311x registers
 * Input          : NumberOfBytes, RegAddress, TxBuffer
 * Return         : error status
@@ -42,7 +42,7 @@
 * STC3115 registers have to be written by 2-byte words (unless NumberOfBytes=1).
 * Byte per byte write does not guaranty the data integrity.
 *******************************************************************************/
-int I2C_Write(int NumberOfBytes, int RegAddress , unsigned char *TxBuffer)
+__attribute__((weak)) int STC3115_I2C_Write(int NumberOfBytes, int RegAddress , unsigned char *TxBuffer)
 {
 	int res=-1;
     
@@ -66,7 +66,7 @@ int I2C_Write(int NumberOfBytes, int RegAddress , unsigned char *TxBuffer)
 * STC3115 registers have to be read by 2-byte words (unless NumberOfBytes=1).
 * Byte per byte read does not guaranty the data integrity.
 *******************************************************************************/
-int I2C_Read(int NumberOfBytes, int RegAddress , unsigned char *RxBuffer)
+__attribute__((weak)) int STC3115_I2C_Read(int NumberOfBytes, int RegAddress , unsigned char *RxBuffer)
 {
 	int res=-1;
   

@@ -70,7 +70,7 @@
                     ##### How to use STC3115 driver #####
   ===============================================================================
 
-	++ 	Update 	I2C_Write and I2C_Read functions with application I2C driver functions 
+	++ 	Update 	STC3115_I2C_Write and STC3115_I2C_Read functions with application I2C driver functions
 		in stc3115_I2C.C file.
 							
 	++	Initialize STC3115 dedicated hardware externally of the driver (I2C 
@@ -149,7 +149,7 @@ static int STC3115_ReadByte(int RegAddress)
   unsigned char data[2];
   int res;
 
-  res = I2C_Read(1, RegAddress , data);
+  res = STC3115_I2C_Read(1, RegAddress , data);
 	
   if (res >= 0)
   {
@@ -176,7 +176,7 @@ static int STC3115_WriteByte(int RegAddress, unsigned char Value)
   unsigned char data[2];
 
   data[0]= Value;
-  res = I2C_Write(1, RegAddress , data);
+  res = STC3115_I2C_Write(1, RegAddress , data);
 	
   return(res);
 
@@ -195,7 +195,7 @@ static int STC3115_ReadWord(int RegAddress)
   unsigned char data[2];
   int res;
 
-  res = I2C_Read(2, RegAddress , data);
+  res = STC3115_I2C_Read(2, RegAddress , data);
   
   if (res >= 0)
   {
@@ -215,7 +215,7 @@ int STC3115_ReadUnsignedWord(unsigned short RegAddress, unsigned short * RegData
   unsigned char data8[2];
   int status;
 
-  status = I2C_Read(2, RegAddress , data8);
+  status = STC3115_I2C_Read(2, RegAddress , data8);
   
   if (status >= 0)
   {
@@ -244,7 +244,7 @@ static int STC3115_WriteWord(int RegAddress, int Value)
   data[0]= Value & 0xff; 
   data[1]= (Value>>8) & 0xff;
   
-  res = I2C_Write(2, RegAddress , data);
+  res = STC3115_I2C_Write(2, RegAddress , data);
 	
   return(res);
 
@@ -260,7 +260,7 @@ static int STC3115_ReadBytes(unsigned char *data,int RegAddress,int nbr)
 {
   int res;
 
-  res = I2C_Read(nbr, RegAddress , data);
+  res = STC3115_I2C_Read(nbr, RegAddress , data);
   
   return(res);
 }
@@ -276,7 +276,7 @@ static int STC3115_WriteBytes(unsigned char *data,int RegAddress,int nbr)
 {
   int res;
 
-  res = I2C_Write(nbr, RegAddress , data);
+  res = STC3115_I2C_Write(nbr, RegAddress , data);
 	
   return(res);
 }
@@ -372,7 +372,7 @@ int STC3115_CheckI2cDeviceId(void)
   int status;
 
   RegAddress = STC3115_REG_ID;
-  status = I2C_Read(1, RegAddress , &data8);
+  status = STC3115_I2C_Read(1, RegAddress , &data8);
 
   if (status >= 0)
   {
