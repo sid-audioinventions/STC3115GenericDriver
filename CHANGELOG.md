@@ -17,7 +17,7 @@ This project is a fork of st-sw/STC3115GenericDriver (https://github.com/st-sw/S
 ## How to Use This Fork
 
 ### Usage (FetchContent example):
-
+```cmake
 include(FetchContent)
 FetchContent_Declare(
   STC3115GenericDriver
