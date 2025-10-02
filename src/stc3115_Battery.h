@@ -45,7 +45,9 @@
 #endif //ALM_VBAT
 #define RSENSE			10			/* sense resistor (soldered on the board) in mOhms */
 
+#ifndef APP_EOC_CURRENT
 #define APP_EOC_CURRENT       75   		/* end charge current in mA                 */
+#endif //APP_EOC_CURRENT
 #ifndef APP_CUTOFF_VOLTAGE
 #define APP_CUTOFF_VOLTAGE	  3000   	/* application cut-off voltage in mV      	*/
 #endif //APP_CUTOFF_VOLTAGE
