@@ -5,6 +5,9 @@ STC3115 fuel gauge Open source generic driver using CMake
 # Note 
 This has been forked from https://github.com/st-sw/STC3115GenericDriver
 
+# Changes from original project
+See CHANGELOG.md for the list of changes from the original project.
+
 Device under test:
 ----------------
 _Device_:       STC3115 Battery Gas gauge.  <br />
