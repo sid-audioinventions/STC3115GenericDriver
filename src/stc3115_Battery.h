@@ -28,21 +28,29 @@
 /* -------------------------------------------------------------------------------- */
 
 /*Battery parameters define  ------------------------------------------------------ */
+#ifndef BATT_CAPACITY
 #define BATT_CAPACITY		1500	/* battery nominal capacity in mAh					*/
+#endif //BATT_CAPACITY
+#ifndef BATT_RINT
 #define BATT_RINT			200		/* Internal battery impedance in mOhms, 0 if unknown	*/
-
+#endif //BATT_RINT
 #define OCV_OFFSET_TAB	{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0} // OCVTAB	(Open Circuit Voltage curve, ie when the battery is relaxed (no charge or discharge)
 	
 /*Application parameters define  -------------------------------------------------- */
 #define VMODE 			MIXED_MODE	/* running mode constant, VM_MODE or MIXED_MODE	*/
 #define ALM_EN			0			/* Alarm enable constant, set at 1 to enable	*/
 #define ALM_SOC			10			/* SOC alarm in % 								*/
+#ifndef ALM_VBAT
 #define ALM_VBAT 		3600		/* Voltage alarm in mV							*/
+#endif //ALM_VBAT
 #define RSENSE			10			/* sense resistor (soldered on the board) in mOhms */
 
+#ifndef APP_EOC_CURRENT
 #define APP_EOC_CURRENT       75   		/* end charge current in mA                 */
+#endif //APP_EOC_CURRENT
+#ifndef APP_CUTOFF_VOLTAGE
 #define APP_CUTOFF_VOLTAGE	  3000   	/* application cut-off voltage in mV      	*/
-
+#endif //APP_CUTOFF_VOLTAGE
 /* ******************************************************************************** */
 
 #endif
