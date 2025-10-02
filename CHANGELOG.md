@@ -26,4 +26,4 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(STC3115GenericDriver)
 
-target_link_libraries(your_app PRIVATE STC3115::Driver)
+target_link_libraries(your_app PRIVATE STC3115GenericDriver)
