@@ -4,6 +4,20 @@ All notable changes to this fork are documented in this file.
 
 This project is a fork of st-sw/STC3115GenericDriver (https://github.com/st-sw/STC3115GenericDriver) with build system improvements.
 
+## [Released] | [1.0.3] - 2025-10-02
+- Renamed the two I2C functions:
+  - I2C_Read --> STC3115_I2C_Read
+  - I2C_Write --> STC3115_I2C_Write
+- Made the two I2C functions have weak definitions so the project that pulls it can create their own definitions
+- The following default battery config defines can be overridden by user:
+  - BATT_CAPACITY
+  - BATT_RINT
+  - ALM_VBAT
+  - APP_EOC_CURRENT
+  - APP_CUTOFF_VOLTAGE
+
+
+
 ## [Released] / [1.0.2] - 2025-10-02
 
 ### Added
